@@ -10,8 +10,8 @@ from threading import Lock, Thread
 
 app = Flask(__name__)
 
-LORA_PORT = None                 # συμπληρώνεται ΑΥΤΟΜΑΤΑ από την ανίχνευση (βλ. detect_lora_port)
-LORA_PORT_CANDIDATES = None      # None = auto (ttyUSB*/ttyACM*)· ή ρητά π.χ. ["/dev/ttyUSB0","/dev/ttyUSB1"]
+LORA_PORT = None                 # συμπληρώνεται ΑΥΤΟΜΑΤΑ 
+LORA_PORT_CANDIDATES = None      # None = auto (ttyUSB*/ttyACM*) ["/dev/ttyUSB0","/dev/ttyUSB1"]
 BAUD_RATE = 115200
 NETWORK_ID = 3
 FREQUENCY = 868000000
@@ -39,8 +39,7 @@ if os.path.exists(DATA_FILE):
 def detect_lora_port():
     """
     Βρίσκει τη θύρα του LoRa δοκιμάζοντας AT σε κάθε υποψήφια (ttyUSB0, ttyUSB1, ... ,
-    μετά ttyACM*). Επιστρέφει την πρώτη που απαντά +OK, ώστε να ΜΗΝ κολλάει σε λάθος
-    θύρα. Αν καμία δεν απαντήσει αλλά υπάρχει θύρα, επιστρέφει την πρώτη (best effort).
+    μετά ttyACM*).
     """
     if LORA_PORT_CANDIDATES:
         candidates = list(LORA_PORT_CANDIDATES)
