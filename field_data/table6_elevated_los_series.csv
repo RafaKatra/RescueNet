@@ -1,0 +1,5 @@
+report,true_distance_m,rssi_dbm,snr_db,assigned_priority,matched_cue,note
+point 10,478,-95,5,CRITICAL,fire,Table 6
+point 11,853,-105,-5,CRITICAL,can't breathe,Table 6
+point 12,5198,-110,-1,MEDIUM,lost,Table 6
+earlier deployment,2807,-86,11,CRITICAL,can't breathe,Figure 7 / Section 3.5

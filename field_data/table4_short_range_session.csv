@@ -1,0 +1,10 @@
+report,message_as_received,gps_fix,rssi_dbm,snr_db,assigned_priority,matched_cue
+1,Help,no,-34,11,MEDIUM,(default)
+2,I am bleeding,yes,-71,10,HIGH,bleeding
+3,Water flooding,no,-86,7,MEDIUM,(default)
+4,I have injured please help,yes,-85,7,HIGH,injured
+5,I am trapped,yes,-71,10,HIGH,trapped
+6,I am trapped,yes,-74,9,HIGH,trapped
+7,Help,yes,-55,9,MEDIUM,(default)
+8,"There is fire, behind please come",yes,-71,8,CRITICAL,fire
+9,There is fire here,yes,-82,9,CRITICAL,fire
