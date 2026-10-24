@@ -1,0 +1,85 @@
+Frozen configuration: rule lexicon + TF-IDF/LR fitted on the 200 synthetic messages (training_data.py sha e7c857d74aae, priority_classifier.py sha ddd6f3a07c92)
+
+[Appen direct messages] n=10738 after de-duplication; mapped tiers: {'LOW': 6078, 'MEDIUM': 3637, 'HIGH': 807, 'CRITICAL': 216}
+
+==============================================================================
+A1. Appen direct messages, balanced sample (CRITICAL=200, HIGH=200, MEDIUM=200, LOW=200)
+==============================================================================
+config      acc    mF1  critRec    crit 95% CI  over  under   recall C / H / M / L
+rule      0.255  0.126    0.000 [0.00, 0.00]   199    397   0.00 / 0.04 / 0.96 / 0.02
+ml        0.296  0.275    0.220 [0.17, 0.28]   194    369   0.22 / 0.07 / 0.39 / 0.51
+hybrid    0.241  0.189    0.220 [0.17, 0.28]   292    315   0.22 / 0.09 / 0.64 / 0.02
+McNemar critical recall (hybrid vs ml): hybrid-only=0 ml-only=0 p=1
+McNemar critical recall (hybrid vs rule): hybrid-only=44 rule-only=0 p=1.14e-13
+messages matching no keyword (rule tier -> MEDIUM default): 80.8%
+
+==============================================================================
+A2. Appen direct messages, natural distribution (n=10738)
+==============================================================================
+config      acc    mF1  critRec    crit 95% CI  over  under   recall C / H / M / L
+rule      0.346  0.160    0.000 [0.00, 0.00]  5960   1061   0.00 / 0.05 / 0.96 / 0.03
+ml        0.412  0.269    0.218 [0.17, 0.28]  4371   1948   0.22 / 0.08 / 0.41 / 0.46
+hybrid    0.263  0.158    0.218 [0.17, 0.28]  7089    821   0.22 / 0.11 / 0.71 / 0.02
+McNemar critical recall (hybrid vs ml): hybrid-only=0 ml-only=0 p=1
+McNemar critical recall (hybrid vs rule): hybrid-only=47 rule-only=0 p=1.42e-14
+messages matching no keyword (rule tier -> MEDIUM default): 87.6%
+
+------------------------------------------------------------------------------
+A3 [post-hoc]. Life-safety view on the natural distribution: a message is
+   'life-safety' if mapped to CRITICAL or HIGH; a prediction 'escalates' if it
+   is CRITICAL or HIGH.
+------------------------------------------------------------------------------
+life-safety n=1023, other n=9715
+config    recall(life-safety)   false escalation
+rule                    0.065              0.008
+ml                      0.255              0.283
+hybrid                  0.282              0.287
+
+------------------------------------------------------------------------------
+A4 [post-hoc]. Same TF-IDF/LR pipeline trained on Appen (5-fold CV on the
+   balanced sample) and trained on Appen, tested on the 200 synthetic messages
+------------------------------------------------------------------------------
+ml (CV on Appen)         acc=0.506 mF1=0.502 critRec=0.465 [0.40,0.54]
+hybrid (rule + that ml)  acc=0.369 mF1=0.333 critRec=0.465 [0.40,0.54]
+train Appen -> test synthetic 200 acc=0.295 mF1=0.267 critRec=0.220
+
+Hybrid confusion matrix, balanced sample (rows true, cols predicted)
+pred      CRITICAL  HIGH  MEDIUM  LOW
+true                                 
+CRITICAL        44    38     114    4
+HIGH            26    18     154    2
+MEDIUM          48    22     127    3
+LOW             29    21     146    4
+
+==============================================================================
+B. CrisisLexT26 tweets - share escalated to CRITICAL/HIGH, by information type
+==============================================================================
+                              esc_rule  esc_ml  esc_hybrid    n
+Information Type                                               
+Other Useful Information         0.457   0.649       0.839  919
+Affected individuals             0.419   0.650       0.798  346
+Caution and advice               0.150   0.618       0.698  301
+Sympathy and support             0.319   0.426       0.652  477
+Infrastructure and utilities     0.229   0.561       0.630  319
+Not applicable                   0.120   0.556       0.611  108
+Not labeled                      0.145   0.534       0.596  324
+Donations and volunteering       0.204   0.451       0.562  406
+
+'Affected individuals' (n=346) vs sympathy/unrelated (n=801)
+  rule    escalated: 0.419 vs 0.248
+  ml      escalated: 0.650 vs 0.469
+  hybrid  escalated: 0.798 vs 0.629
+
+==============================================================================
+C. SMS Spam Collection - irrelevant messages (false-alarm check)
+==============================================================================
+
+spam (n=747)   share assigned CRITICAL / HIGH / MEDIUM / LOW
+  rule    0.000 / 0.000 / 0.941 / 0.059
+  ml      0.212 / 0.056 / 0.220 / 0.513
+  hybrid  0.212 / 0.056 / 0.707 / 0.025
+
+ham (n=4825)   share assigned CRITICAL / HIGH / MEDIUM / LOW
+  rule    0.002 / 0.008 / 0.969 / 0.021
+  ml      0.231 / 0.153 / 0.212 / 0.404
+  hybrid  0.232 / 0.156 / 0.596 / 0.015

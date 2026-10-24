@@ -1,0 +1,93 @@
+train 54881  dev 8026  test 15569 (after de-duplication against train/dev)
+test families: {'storm': 4993, 'other': 4034, 'flood': 2686, 'earthquake': 2585, 'bombing/explosion': 978, 'wildfire': 268, 'shooting': 25}
+retrained: C=30 chosen on dev (macro-F1 0.889)
+
+==========================================================================================
+A. Official test split, all events
+
+A. all events  (n=15569; positives=2036, negatives=13533)
+  frozen-rule                  recall 0.063 [0.05,0.07]  false-esc 0.037  macroF1 0.506
+  frozen-ml                    recall 0.318 [0.30,0.34]  false-esc 0.382  macroF1 0.442
+  frozen-hybrid                recall 0.335 [0.32,0.36]  false-esc 0.399  macroF1 0.437
+  retrained-ml                 recall 0.888 [0.87,0.90]  false-esc 0.044  macroF1 0.891
+  retrained+rule(matched)      recall 0.893 [0.88,0.91]  false-esc 0.079  macroF1 0.845
+
+==========================================================================================
+B. Per event family (same models; retrained saw these families in training)
+
+B. bombing/explosion  (n=978; positives=0, negatives=978)
+  frozen-rule                  recall   nan [nan,nan]  false-esc 0.047  macroF1   nan
+  frozen-ml                    recall   nan [nan,nan]  false-esc 0.402  macroF1   nan
+  frozen-hybrid                recall   nan [nan,nan]  false-esc 0.428  macroF1   nan
+  retrained-ml                 recall   nan [nan,nan]  false-esc 0.015  macroF1   nan
+  retrained+rule(matched)      recall   nan [nan,nan]  false-esc 0.060  macroF1   nan
+
+B. earthquake  (n=2585; positives=307, negatives=2278)
+  frozen-rule                  recall 0.195 [0.15,0.24]  false-esc 0.018  macroF1 0.617
+  frozen-ml                    recall 0.622 [0.57,0.68]  false-esc 0.401  macroF1 0.498
+  frozen-hybrid                recall 0.642 [0.59,0.69]  false-esc 0.406  macroF1 0.500
+  retrained-ml                 recall 0.827 [0.78,0.87]  false-esc 0.079  macroF1 0.816
+  retrained+rule(matched)      recall 0.834 [0.79,0.87]  false-esc 0.092  macroF1 0.801
+
+B. flood  (n=2686; positives=137, negatives=2549)
+  frozen-rule                  recall 0.044 [0.01,0.08]  false-esc 0.018  macroF1 0.515
+  frozen-ml                    recall 0.474 [0.40,0.56]  false-esc 0.332  macroF1 0.456
+  frozen-hybrid                recall 0.474 [0.40,0.56]  false-esc 0.343  macroF1 0.450
+  retrained-ml                 recall 0.934 [0.89,0.97]  false-esc 0.046  macroF1 0.821
+  retrained+rule(matched)      recall 0.934 [0.89,0.97]  false-esc 0.062  macroF1 0.786
+
+B. other  (n=4034; positives=1416, negatives=2618)
+  frozen-rule                  recall 0.026 [0.02,0.03]  false-esc 0.033  macroF1 0.412
+  frozen-ml                    recall 0.210 [0.19,0.23]  false-esc 0.411  macroF1 0.399
+  frozen-hybrid                recall 0.225 [0.20,0.25]  false-esc 0.426  macroF1 0.400
+  retrained-ml                 recall 0.919 [0.91,0.93]  false-esc 0.038  macroF1 0.942
+  retrained+rule(matched)      recall 0.921 [0.91,0.93]  false-esc 0.069  macroF1 0.921
+
+B. storm  (n=4993; positives=155, negatives=4838)
+  frozen-rule                  recall 0.032 [0.01,0.06]  false-esc 0.012  macroF1 0.512
+  frozen-ml                    recall 0.523 [0.45,0.61]  false-esc 0.374  macroF1 0.421
+  frozen-hybrid                recall 0.523 [0.45,0.61]  false-esc 0.378  macroF1 0.419
+  retrained-ml                 recall 0.690 [0.61,0.76]  false-esc 0.035  macroF1 0.736
+  retrained+rule(matched)      recall 0.710 [0.64,0.78]  false-esc 0.047  macroF1 0.710
+
+B. wildfire  (n=268; positives=21, negatives=247)
+  frozen-rule                  recall 1.000 [1.00,1.00]  false-esc 0.927  macroF1 0.145
+  frozen-ml                    recall 0.619 [0.43,0.81]  false-esc 0.498  macroF1 0.410
+  frozen-hybrid                recall 1.000 [1.00,1.00]  false-esc 0.960  macroF1 0.114
+  retrained-ml                 recall 0.810 [0.62,0.95]  false-esc 0.061  macroF1 0.801
+  retrained+rule(matched)      recall 1.000 [1.00,1.00]  false-esc 0.927  macroF1 0.145
+
+==========================================================================================
+C. Event-family held out (retrained on all OTHER families)
+
+C. held out: wildfire  (n=268; positives=21, negatives=247)
+  frozen-rule                  recall 1.000 [1.00,1.00]  false-esc 0.927  macroF1 0.145
+  frozen-ml                    recall 0.619 [0.43,0.81]  false-esc 0.498  macroF1 0.410
+  frozen-hybrid                recall 1.000 [1.00,1.00]  false-esc 0.960  macroF1 0.114
+  retrained-ml                 recall 0.381 [0.19,0.57]  false-esc 0.069  macroF1 0.643
+  retrained+rule(matched)      recall 1.000 [1.00,1.00]  false-esc 0.927  macroF1 0.145
+
+C. bombing/explosion: 0 positives -> recall not estimable; only the false-escalation rate is meaningful
+
+C. held out: bombing/explosion  (n=978; positives=0, negatives=978)
+  frozen-rule                  recall   nan [nan,nan]  false-esc 0.047  macroF1   nan
+  frozen-ml                    recall   nan [nan,nan]  false-esc 0.402  macroF1   nan
+  frozen-hybrid                recall   nan [nan,nan]  false-esc 0.428  macroF1   nan
+  retrained-ml                 recall   nan [nan,nan]  false-esc 0.053  macroF1   nan
+  retrained+rule(matched)      recall   nan [nan,nan]  false-esc 0.092  macroF1   nan
+
+C. shooting: only 25 test items, skipped
+
+C. held out: earthquake  (n=2585; positives=307, negatives=2278)
+  frozen-rule                  recall 0.195 [0.15,0.24]  false-esc 0.018  macroF1 0.617
+  frozen-ml                    recall 0.622 [0.57,0.68]  false-esc 0.401  macroF1 0.498
+  frozen-hybrid                recall 0.642 [0.59,0.69]  false-esc 0.406  macroF1 0.500
+  retrained-ml                 recall 0.870 [0.83,0.91]  false-esc 0.348  macroF1 0.586
+  retrained+rule(matched)      recall 0.883 [0.84,0.92]  false-esc 0.357  macroF1 0.582
+
+C. held out: flood  (n=2686; positives=137, negatives=2549)
+  frozen-rule                  recall 0.044 [0.01,0.08]  false-esc 0.018  macroF1 0.515
+  frozen-ml                    recall 0.474 [0.40,0.56]  false-esc 0.332  macroF1 0.456
+  frozen-hybrid                recall 0.474 [0.40,0.56]  false-esc 0.343  macroF1 0.450
+  retrained-ml                 recall 0.912 [0.86,0.96]  false-esc 0.139  macroF1 0.664
+  retrained+rule(matched)      recall 0.912 [0.86,0.96]  false-esc 0.153  macroF1 0.649
