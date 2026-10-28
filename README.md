@@ -16,7 +16,7 @@ field.
 This repository contains the source code, the labelled triage corpus and the
 field-measurement data supporting the paper:
 
-> R. Katramados, M. Iatrou, C. Liambas. *Ethical Hacking Methods for Search and
+> R. Katramados, . *Ethical Hacking Methods for Search and
 > Rescue: A Portable LoRa System with Authenticated Encryption and
 > Machine-Learning Triage.* Submitted to *Information* (MDPI), Special Issue
 > "AI-Driven Information Analytics for Cybersecurity and Privacy", 2026.
