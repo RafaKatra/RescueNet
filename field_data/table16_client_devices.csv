@@ -1,0 +1,9 @@
+device,operating_system,trials,portal_opened_automatically,location_obtained,report_delivered,observation
+Samsung Galaxy S24 Ultra,Android 14,3,3,3,3,
+Motorola Edge 50 Pro,Android 14,2,2,2,2,
+Apple iPhone 15 Pro,iOS 18.1.1,2,2,2,2,noticeable delay before the sign-in page
+Xiaomi 14T Pro,Android 14,2,2,2,2,
+Huawei P30 Pro,Android 10,1,1,1,1,
+Dell Precision (laptop),Windows 11,2,2,2,2,
+Xiaomi 14T Pro (failure path: location permission refused),Android 14,1,1,0 (refused),1,form asked for the location to be typed; report delivered with the typed location and no coordinates
+Xiaomi 14T Pro (failure path: disconnected and reconnected manually),Android 14,1,1 (after reconnection),n/a,1,sign-in page reopened automatically on reconnection; report then delivered

@@ -1,0 +1,10 @@
+test,position,distance_m,reports_sent,reports_received_authenticated,rssi_dbm,snr_db,note
+A_repeated_delivery,A,5,30,30,-53.3 (mean; SD 4.6; range -67 to -42),,summary of 30 reports; per-report values in table11a_repeated_delivery_reports.csv (SNR not logged per report)
+B_ground_level,B1,18,1,1,-43,9,
+B_ground_level,B2,45,1,1,-60,9,
+B_ground_level,B3,294,1,1,-86,6,
+B_ground_level,B4,2950,1,1,-85,7,
+B_ground_level,B5,3110,1,1,-95,-5,
+B_ground_level,B6,3180,1,1,-92,1,
+B_ground_level,B7,3300,1,1,-96,-5,
+B_ground_level,B8,3450,1,1,-96,-9,

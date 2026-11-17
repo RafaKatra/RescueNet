@@ -1,0 +1,19 @@
+Read-back of the active radio settings of the hub module (python3 lora_at.py), 14 November 2026.
+The module had been power-cycled, so the band shows the factory default; the hub sets 868 MHz at every start.
+
+Firmware:   RYLR998_REYAX_V1.2.4
+Address:    0
+Network ID: 3
+Band:       915000000 Hz   (factory default after power-up; not stored in flash)
+Parameter:  9,7,1,12  ->  SF9, 125 kHz, CR 4/5, preamble 12
+Power:      20 dBm
+
+AT+PARAMETER=12,7,1,8  ->  +ERR=4
+Active after the command: 9,7,1,12  ->  SF9, 125 kHz, CR 4/5, preamble 12
+
+AT+BAND=868000000      ->  +OK
+AT+BAND?               ->  868000000
+
+Conclusion: the firmware rejects spreading factor 12 with an 8-symbol preamble, which the code used for the
+field measurements had requested, and the module keeps SF9, 125 kHz, CR 4/5, 12-symbol preamble. All field
+measurements of the paper were therefore taken with that setting at 868 MHz and 20 dBm.
