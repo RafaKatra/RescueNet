@@ -1,0 +1,34 @@
+# Keys and per-deployment secrets (never commit)
+*.key
+rescuenet.key
+mission.key
+mission_*_hub*.key
+mission_counter.json
+missions_issued.json
+replay_state.json
+cert.pem
+key.pem
+
+# Field logs (contain names, messages, positions, client IPs)
+emergency_data/
+*.log
+
+# Trained model, offline map cache
+priority_model.pkl
+rescuenet_tiles.db
+
+# Script outputs
+results.json
+compare_models.json
+link_stats.json
+crisisbench_metrics.csv
+test_results_crypto_v2.txt
+figure8_queue.png
+confusion_matrices.png
+crisisbench_confusion.png
+fig_link.png
+fig_models.png
+
+# Python
+__pycache__/
+*.pyc
